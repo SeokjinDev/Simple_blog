@@ -6,6 +6,6 @@
 ### Environment
 Language : Java   
 Version : JDK 17   
-Framework : Spring Boot 
+Framework : Spring Boot 3.2.3
 
 Database : H2
