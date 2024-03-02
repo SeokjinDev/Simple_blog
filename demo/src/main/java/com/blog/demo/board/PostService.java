@@ -1,7 +1,9 @@
 package com.blog.demo.board;
+import com.blog.demo.exception.DataNotFoundException;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -12,7 +14,16 @@ import lombok.RequiredArgsConstructor;
 public class PostService {
     private final PostRepository postRepository;
 
-    public List<Post> getList() {
+    public Post getPost(Integer id) {
+        Optional<Post> post = this.postRepository.findById(id);
+        if (post.isPresent()) {
+            return post.get();
+        } else {
+            throw new DataNotFoundException("post not found");
+        }
+    }
+
+    public List<Post> getPostList() {
         return this.postRepository.findAll();
     }
 
