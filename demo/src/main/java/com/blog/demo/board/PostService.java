@@ -1,5 +1,6 @@
 package com.blog.demo.board;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -21,5 +22,13 @@ public class PostService {
 
     public List<Post> getTitleLike(String title) {
         return this.postRepository.findByTitleLike(title);
+    }
+
+    public void create(String title, String content) {
+        Post p = new Post();
+        p.setTitle(title);
+        p.setContent(content);
+        p.setCreateDate(LocalDateTime.now());
+        this.postRepository.save(p);
     }
 }
