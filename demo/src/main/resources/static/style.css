@@ -1,0 +1,19 @@
+textarea {
+    width:100%;
+}
+
+input[type=text] {
+    width: 100%;
+}
+
+input[type=submit] {
+    margin-top:10px;
+}
+
+a {
+    text-decoration-line: none;
+    color: inherit;
+}
+a:hover {
+    color: aqua;
+}

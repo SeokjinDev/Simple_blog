@@ -5,8 +5,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.validation.BindingResult;
+
+import jakarta.validation.Valid;
 
 import lombok.RequiredArgsConstructor;
 
@@ -18,11 +20,20 @@ import java.util.List;
 public class PostController {
     private final PostService postService;
 
+    @GetMapping("/create")
+    public String postCreate(PostForm postForm) {
+        return "post_create";
+    }
+
     @PostMapping("/create")
-    public String createPost(@RequestParam("title") String title, @RequestParam("content") String content) {
-        this.postService.create(title, content);
+    public String postCreate(@Valid PostForm postForm, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "post_create";
+        }
+        this.postService.create(postForm.getTitle(), postForm.getContent());
         return "redirect:/post/list";
     }
+
 
     @GetMapping("/list")
     public String list(Model model) {
